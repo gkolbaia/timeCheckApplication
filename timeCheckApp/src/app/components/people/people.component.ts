@@ -22,31 +22,34 @@ export class PeopleComponent implements OnInit {
     person.personWorking = !person.personWorking;
     if (person.personWorking === true) {
       person.enterTime = new Date();
-      console.log(person);
-
     } else {
       person.leaveTime = new Date();
       person.workingTime += Math.round((person.leaveTime.getTime() - person.enterTime.getTime()) / 1000 / 60);
       person.enterTime = null;
-      this._services.putStaff(person as People).subscribe()
+      this._services.putStaff(person as People).subscribe();
 
     }
   }
   calculateSalary(person) {
-    person.salaryForMonth = person.workingTime * person.salaryPerhour;
+    person.salaryForMonth = (person.workingTime * 60) * person.salaryPerhour;
   }
   onNewStaff(staff: People) {
-    this.people.unshift(staff);
+    if (!staff.firstName || !staff.lastName || !staff.salaryPerhour) {
+      alert('fill in all field')
+    } else {
+      this.people.unshift(staff);
+    }
   }
   deleteStaff(person) {
-    this._services.deleteStaff(person).subscribe((person) => {
-      console.log(person);
-    });
+    this._services.deleteStaff(person).subscribe();
     for (let i = 0; i < this.people.length; i++) {
       if (this.people[i].id === person.id) {
         this.people.splice(i, 1);
       }
     }
+
+  }
+  getTime(date: Date) {
 
   }
 }

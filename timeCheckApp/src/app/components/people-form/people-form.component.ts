@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter,Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { People } from 'src/app/models/people-model';
 import { StaffServicesService } from
-'../../service/staff-services.service'
+  '../../service/staff-services.service'
 
 
 @Component({
@@ -25,15 +25,13 @@ export class PeopleFormComponent implements OnInit {
     enterTime: null,
     leaveTime: null,
   };
-   @Output() newStaff:EventEmitter<People> = new EventEmitter();
+  @Output() newStaff: EventEmitter<People> = new EventEmitter();
   constructor(private _services: StaffServicesService) { }
 
   ngOnInit() {
 
   }
   addUser(e, firstName, lastName, sallaryPerHour) {
-    e.preventDefault();
-
     this.staff.id = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
     this.staff.firstName = firstName;
     this.staff.lastName = lastName;
@@ -43,5 +41,12 @@ export class PeopleFormComponent implements OnInit {
       this.newStaff.emit(staff);
     });
     this.staff.firstName = '';
+    this.staff.lastName = '';
+    this.staff.salaryPerhour = null;
+    e.preventDefault();
   }
+
+
 }
+
+

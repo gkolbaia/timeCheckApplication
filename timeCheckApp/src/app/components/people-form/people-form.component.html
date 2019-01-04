@@ -4,15 +4,15 @@
   <form>
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" [(ngModel)]="newStaff.firstName" name="firstName" class="form-control" #firstName>
+      <input type="text" [(ngModel)]="staff.firstName" name="firstName" class="form-control" #firstName>
     </div>
     <div class="form-group">
       <label>Second Name</label>
-      <input type="text" class="form-control" #secondName>
+      <input type="text" [(ngModel)]="staff.lastName" name="lastName" class="form-control" #secondName>
     </div>
     <div class="form-group">
       <label>Sallary per hour</label>
-      <input type="number" class="form-control" #payment>
+      <input type="number" [(ngModel)]="staff.salaryPerhour" name="salaryPerhour" class="form-control" #payment>
 
     </div>
     <button (click)="addUser($event,firstName.value,secondName.value,payment.value)" class="btn btn-dark mb-3">Add User</button>
