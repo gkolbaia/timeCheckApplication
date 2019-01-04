@@ -64,17 +64,7 @@ app.post('/getStaffInfo', function (req, res) {
     res.json(JSON.parse(result))
 
 });
-app.post('/saveStaffInfo', function (req, res) {
-    let result = fs.readFileSync("../timeCheckApp/src/app/staff_data/staff-personal.json", 'utf8');
-    let data = JSON.parse(result);
-    data.push(req.body);
-    fs.writeFile("../timeCheckApp/src/app/staff_data/staff-personal.json", JSON.stringify(data), function (err) {
-        if (err) {
-            console.log(err);
-        }
-        res.json(req.body);
-    });
-})
+
 
 app.listen(8000, () => {
     console.log('Server listening on port ' + 8000);
