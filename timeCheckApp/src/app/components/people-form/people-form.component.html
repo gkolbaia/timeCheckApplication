@@ -1,0 +1,20 @@
+<button (click)="showUserForm = !showUserForm" class="btn btn-dark mb-3">Add User</button>
+<div class="card card-body mb-3" *ngIf="showUserForm">
+  <h2>Add User</h2>
+  <form>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="newStaff.firstName" name="firstName" class="form-control" #firstName>
+    </div>
+    <div class="form-group">
+      <label>Second Name</label>
+      <input type="text" class="form-control" #secondName>
+    </div>
+    <div class="form-group">
+      <label>Sallary per hour</label>
+      <input type="number" class="form-control" #payment>
+
+    </div>
+    <button (click)="addUser($event,firstName.value,secondName.value,payment.value)" class="btn btn-dark mb-3">Add User</button>
+  </form>
+</div>

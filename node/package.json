@@ -1,0 +1,17 @@
+{
+  "name": "mantis-app",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
