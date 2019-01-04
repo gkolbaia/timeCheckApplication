@@ -22,6 +22,9 @@ export class StaffServicesService {
   deleteStaff(data){
     return this._http.post<People>('http://localhost:8000/deleteStaff', data)
   }
+  getStaffInfo(){
+    return this._http.post('http://localhost:8000/getStaffInfo', {});
+  }
 
 
 }

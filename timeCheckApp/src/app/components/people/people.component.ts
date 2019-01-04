@@ -15,7 +15,10 @@ export class PeopleComponent implements OnInit {
 
     this._services.getStaff().subscribe((res: People[]) => {
       this.people = res;
-      console.log(this.people)
+
+    })
+    this._services.getStaffInfo().subscribe((res)=>{
+      console.log(res);
     })
   }
   personWorking(person) {
@@ -31,7 +34,7 @@ export class PeopleComponent implements OnInit {
     }
   }
   calculateSalary(person) {
-    person.salaryForMonth = (person.workingTime * 60) * person.salaryPerhour;
+    person.salaryForMonth = (person.workingTime / 60) * person.salaryPerhour;
   }
   onNewStaff(staff: People) {
     if (!staff.firstName || !staff.lastName || !staff.salaryPerhour) {
@@ -49,8 +52,6 @@ export class PeopleComponent implements OnInit {
     }
 
   }
-  getTime(date: Date) {
 
-  }
 }
 
