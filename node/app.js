@@ -35,6 +35,7 @@ app.post('/putStaff', function (req, res) {
             data.splice(i, 1);
         }
     };
+    req.body.showPersonParameter = false;
     data.push(req.body);
     fs.writeFile("../timeCheckApp/src/app/staff_data/staffs.json", JSON.stringify(data), function (err) {
         if (err) {

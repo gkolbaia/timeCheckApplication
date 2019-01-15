@@ -13,7 +13,6 @@ export class StaffServicesService {
   }
 
   saveStaff(data) {
-
     return this._http.post<People>('http://localhost:8000/saveStaff', data);
   }
   putStaff(data) {

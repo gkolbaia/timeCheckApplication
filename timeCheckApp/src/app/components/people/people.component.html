@@ -1,7 +1,8 @@
-<app-people-form (newStaff)="onNewStaff($event)" ></app-people-form>
+<app-people-form *ngIf="false" (newStaff)="onNewStaff($event)" ></app-people-form>
+<a [routerLink]="['/adduser']" class="btn btn-success mt-4 mb-3"><i class="fa fa-plus"></i> Add User</a>
 <ul class="list-unstyled">
   <li class="card card-body mb-2" *ngFor="let person of people">
-    <h3>{{ person.firstName }} {{ person.lastName }}
+    <h3> <a routerLink="person-info/{{ person.id }}" style="color:black; text-decoration: none" > {{ person.firstName }} {{ person.lastName }} </a>
       <small>
         <button (click)="person.showPersonParameter=!person.showPersonParameter" class="btn btn-dark btn-sm mr-2">
           <i [ngClass]="person.showPersonParameter ? 'fa fa-minus' : 'fa fa-plus'"></i>
@@ -9,17 +10,17 @@
       </small>
       <!-- chamrtveli -->
       <small>
-        <button (click)="personWorking(person)" [ngClass]="person.personWorking ? 'btn-success' : 'btn-dark' " class="btn  btn-sm mr-2">
+        <button (click)="personWorking(person)" [ngClass]="person.working ? 'btn-success' : 'btn-dark' " class="btn  btn-sm mr-2">
           <i class="fa fa-power-off"></i>
         </button>
       </small>
       <small>
-          <button (click)="calculateSalary(person)" class="btn btn-dark btn-sm">
+          <button (click)="calculateSalary(person)" title="Calculate sallary" class="btn btn-dark btn-sm">
               <i class="fas fa-dollar-sign"></i>
           </button>
         </small>
         <small>
-          <button (click)="deleteStaff(person)" style="font-family:sans-serif" class="btn btn-dark btn-sm ml-2">
+          <button (click)="deleteStaff(person)" title="delete" style="font-family:sans-serif" class="btn btn-dark btn-sm ml-2">
               <i class="fas fa-remove">X</i>
           </button>
         </small>
@@ -28,7 +29,7 @@
       <li class="list-group-item">Joined: {{person.joined }}</li>
       <li class="list-group-item">Time: hour {{(person.workingTime - (person.workingTime%60))/60}} mins:
         {{person.workingTime%60}}</li>
-      <li class="list-group-item">Salary: <input type="text" [(ngModel)]="person.salaryForMonth" disabled = "true"> </li>
+      <li class="list-group-item">Salary: <input type="text" [(ngModel)]="person.salaryForMonth" disabled = "true"></li>
     </ul>
   </li>
 </ul>
