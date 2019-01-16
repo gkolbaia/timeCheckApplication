@@ -42,46 +42,29 @@ export class PeopleFormComponent implements OnInit {
 
   }
   onSubmit({ value, valid }: { value: People, valid: boolean }) {
-
     if (valid) {
       this.staff.id = this.generateId();
       this.staff.firstName = value.firstName;
       this.staff.lastName = value.lastName;
       this.staff.email = value.email;
-      this.staff.email = value.email;
+      this.staff.phone = value.phone;
       this.staff.salaryPerhour = value.salaryPerhour;
       this.staff.joined = new Date().toLocaleDateString();
       this._services.saveStaff(this.staff as People).subscribe(staff=>{
-        this.newStaff.emit(staff);
+
+        this._router.navigate(['/'])
       });
-
-
     } else {
       this._flashMessagesService.show('Fill In all Fields Corectly', {
         cssClass: 'alert-danger', timeout: 4000
       })
     }
-    this.clearFields();
-    this._router.navigate(['/'])
-  }
-
-
-
-  restartPeriod() {
-    this._services.getStaff().subscribe(res => {
-      // var v = JSON.stringify(res);
-      // var x = JSON.parse(v);
-      // if (x.length > 0) {
-      //   x.forEach(element => {
-      //     element.salaryForMonth = null;
-      //     element.workingTime = null;
-
-      //   });
-
-      // }
-    });
 
   }
+
+
+
+
 
   generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

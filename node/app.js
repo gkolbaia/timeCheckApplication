@@ -9,9 +9,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.post('/saveStaff', function (req, res) {
-    let result = fs.readFileSync("../timeCheckApp/src/app/staff_data/staffs.json", 'utf8');
-    let data = JSON.parse(result);
+
+    let data = readFileDB("../timeCheckApp/src/app/staff_data/staffs.json");
+    if(!data){
+        data = [];
+    }
+
     data.push(req.body);
+
     fs.writeFile("../timeCheckApp/src/app/staff_data/staffs.json", JSON.stringify(data), function (err) {
         if (err) {
             console.log(err);
@@ -19,13 +24,41 @@ app.post('/saveStaff', function (req, res) {
         res.json(req.body);
     });
 });
+
 app.post('/getStaff', function (req, res) {
-    let result = fs.readFileSync("../timeCheckApp/src/app/staff_data/staffs.json", 'utf8');
-    res.json(JSON.parse(result))
-
+    let result = readFileDB("../timeCheckApp/src/app/staff_data/staffs.json");
+    res.json(result);
 });
+function readFileDB(fileUrl) {
+    let isSuccessfullyParsed = false;
+    let result = null;
+    let counter = 0;
+    let interval = null;
+     let resultStr = fs.readFileSync(fileUrl, 'utf8', );
+     result = JSON.parse(resultStr);
+     return result;
 
-
+    // (
+    //     interval = setInterval( () => {
+    //         try {
+    //             counter++;
+    //             let resultStr = fs.readFileSync(fileUrl, 'utf8', );
+    //             result = JSON.parse(resultStr);
+    //             isSuccessfullyParsed = true;
+    //         } catch (ex) {
+    //             if(counter > 10){
+    //                 isSuccessfullyParsed = true;
+    //             }
+    //         }
+    //     }, 1000)    
+    // )();
+    // while(!isSuccessfullyParsed){
+    //     if(counter > 0) {
+    //     }
+    // }
+    // clearInterval(interval);
+    // return result;
+}
 
 app.post('/putStaff', function (req, res) {
     let result = fs.readFileSync("../timeCheckApp/src/app/staff_data/staffs.json", 'utf8');
@@ -65,6 +98,8 @@ app.post('/getStaffInfo', function (req, res) {
     res.json(JSON.parse(result))
 
 });
+
+
 
 
 app.listen(8000, () => {

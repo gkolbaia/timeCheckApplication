@@ -9,14 +9,16 @@ import { StaffServicesService } from './service/staff-services.service'
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { PeopleInfoComponent } from './components/people-info/people-info.component';
-import { FlashMessagesModule } from 'angular2-flash-messages'
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { EditComponentComponent } from './components/edit-component/edit-component.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     PeopleComponent,
     PeopleFormComponent,
-    PeopleInfoComponent
+    PeopleInfoComponent,
+    EditComponentComponent
   ],
   imports: [
     BrowserModule,

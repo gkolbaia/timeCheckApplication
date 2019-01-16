@@ -1,5 +1,5 @@
 <div class="mt-4">
-
+<a [routerLink]="['/']"><i class="fas fa-arrow-left"></i> back</a>
 <div class="card card-body mb-3" >
   <h2>Add User</h2>
   <flash-messages></flash-messages>
@@ -74,15 +74,15 @@
           name="phone"
           class="form-control"
           #phone="ngModel"
-          [ngClass]="{'is-invalid':lastName.errors && lastName.touched}"
+          [ngClass]="{'is-invalid':phone.errors && phone.touched}"
           required
           minlength="9"
           >
           <div [hidden]="!phone.errors?.required" class="invalid-feedback" >
-            Second Name required
+            phone required
           </div>
           <div class="invalid-feedback" [hidden]="!phone.errors?.minlength">
-            Second Name Should be at least 9 Character
+            phone  Should be at least 9 Character
           </div>
 
     </div>
@@ -93,18 +93,18 @@
       <input
            type="number"
            [(ngModel)]="staff.salaryPerhour"
-           name="sallaryPerHour"
+           name="salaryPerhour"
            class="form-control"
-           #sallaryPerHour="ngModel"
-           [ngClass]="{'is-invalid': sallaryPerHour.errors && sallaryPerHour.touched}"
+           #salaryPerhour="ngModel"
+           [ngClass]="{'is-invalid': salaryPerhour.errors && salaryPerhour.touched}"
            required
            >
-           <div class="invalid-feedback" [hidden]="!sallaryPerHour.errors?.required">
+           <div class="invalid-feedback" [hidden]="!salaryPerhour.errors?.required">
              Sallary Per hour Required
            </div>
     </div>
-    <button type="submit" class="btn btn-dark mb-3">Submit</button>
+    <button type="submit" class="btn btn-dark mb-3">Add User</button>
   </form>
 </div>
 </div>
-<!-- (click)="addUser($event,firstName.value,lastName.value,sallaryPerHour.value)" -->
+

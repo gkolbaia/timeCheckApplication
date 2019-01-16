@@ -1,5 +1,5 @@
-<app-people-form *ngIf="false" (newStaff)="onNewStaff($event)" ></app-people-form>
-<a [routerLink]="['/adduser']" class="btn btn-success mt-4 mb-3"><i class="fa fa-plus"></i> Add User</a>
+
+<a [routerLink]="['/adduser']" class="btn btn-success mt-4 mb-3"><i class="fa fa-plus"></i> Add Staff</a>
 <ul class="list-unstyled">
   <li class="card card-body mb-2" *ngFor="let person of people">
     <h3> <a routerLink="person-info/{{ person.id }}" style="color:black; text-decoration: none" > {{ person.firstName }} {{ person.lastName }} </a>
@@ -20,9 +20,13 @@
           </button>
         </small>
         <small>
-          <button (click)="deleteStaff(person)" title="delete" style="font-family:sans-serif" class="btn btn-dark btn-sm ml-2">
-              <i class="fas fa-remove">X</i>
+          <button (click)="deleteStaff(person)" title="delete"  class="btn btn-danger btn-sm  float-right" style="border-top-left-radius:0px;border-bottom-left-radius:0px" >
+              <i class="fas fa-trash"></i>delete
           </button>
+        </small>
+        <small>
+
+          <a title="edit" routerLink="person-edit/{{ person.id }}" class="btn btn-primary btn-sm  float-right" style="border-top-right-radius:0px;border-bottom-right-radius:0px"><i class="far fa-edit"></i> Edit</a>
         </small>
     </h3>
     <ul class="list-group" *ngIf="person.showPersonParameter">

@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { People } from "../../models/people-model";
-import { FlashMessagesModule } from "angular2-flash-messages/module/module";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { StaffServicesService } from "../../service/staff-services.service";
 import { Router, ActivatedRoute } from '@angular/router';
-
 @Component({
-  selector: 'app-people-info',
-  templateUrl: './people-info.component.html',
-  styleUrls: ['./people-info.component.css']
+  selector: 'app-edit-component',
+  templateUrl: './edit-component.component.html',
+  styleUrls: ['./edit-component.component.css']
 })
-export class PeopleInfoComponent implements OnInit {
+export class EditComponentComponent implements OnInit {
   id: string;
   staff: People;
-
   constructor(
     private _staffServices: StaffServicesService,
     private _flashMessages: FlashMessagesService,
@@ -29,12 +26,25 @@ export class PeopleInfoComponent implements OnInit {
       arr.forEach(element => {
         if (element.id === this.id) {
           this.staff = element;
-          console.log(this.staff)
+
         }
       });
-
     })
-
   }
-
+  onSubmit({ value, valid }: { value: People, valid: boolean }) {
+    if (valid) {
+      this.staff.firstName = value.firstName;
+      this.staff.lastName = value.lastName;
+      this.staff.email = value.email;
+      this.staff.phone = value.phone;
+      this.staff.salaryPerhour = value.salaryPerhour;
+      this._staffServices.putStaff(this.staff).subscribe(res => {
+        this._router.navigate(['/'])
+      })
+    } else {
+      this._flashMessages.show('Fill in all fields corectly', {
+        cssClass: 'alert-danger', timeout: 4000
+      })
+    }
+  }
 }
