@@ -22,17 +22,28 @@ export class PeopleComponent implements OnInit {
     if (person.working === true) {
       person.enterTime = new Date().getTime();
       this._services.putStaff(person as People).subscribe();
+      console.log(person.workingTime)
 
     } else {
       person.leaveTime = new Date();
       person.workingTime += Math.round((person.leaveTime.getTime() - person.enterTime) / 1000 / 60);
       person.enterTime = null;
       this._services.putStaff(person as People).subscribe();
+      console.log(person.workingTime)
 
     }
+    console.log(person.workingTime)
   }
   calculateSalary(person) {
-    person.salaryForMonth = Math.round((person.workingTime / 60) * person.salaryPerhour);
+    if (!person.working) {
+      person.salaryForMonth = Math.round((person.workingTime / 60) * person.salaryPerhour);
+      this._services.putStaff(person as People).subscribe();
+      console.log(person.workingTime)
+    } else {
+      var workingTime = person.workingTime + Math.round(((new Date().getTime()) - person.enterTime)/1000/60)
+      person.salaryForMonth = Math.round((workingTime / 60) * person.salaryPerhour)
+      console.log(workingTime)
+    }
   }
 
   deleteStaff(person) {
