@@ -28,12 +28,19 @@
 
           <a title="edit" routerLink="person-edit/{{ person.id }}" class="btn btn-primary btn-sm  float-right" style="border-top-right-radius:0px;border-bottom-right-radius:0px"><i class="far fa-edit"></i> Edit</a>
         </small>
+        <small>
+
+          <a title="edit" routerLink="person-info/{{ person.id }}" class="btn btn-dark btn-sm ml-2 "><i class="fa fa-info-circle" aria-hidden="true"></i> Details</a>
+        </small>
+
+
     </h3>
     <ul class="list-group" *ngIf="person.showPersonParameter">
       <li class="list-group-item">Joined: {{person.joined }}</li>
       <li class="list-group-item">Time: hour {{(person.workingTime - (person.workingTime%60))/60}} mins:
         {{person.workingTime%60}}</li>
       <li class="list-group-item">Salary: <input type="text" [(ngModel)]="person.salaryForMonth" disabled = "true"></li>
+
     </ul>
   </li>
 </ul>
