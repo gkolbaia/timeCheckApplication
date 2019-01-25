@@ -18,8 +18,8 @@ export class PeopleFormComponent implements OnInit {
     id: '',
     firstName: '',
     lastName: '',
-    email:'',
-    phone:'',
+    email: '',
+    phone: '',
     joined: null,
     showPersonParameter: false,
     working: false,
@@ -50,10 +50,12 @@ export class PeopleFormComponent implements OnInit {
       this.staff.phone = value.phone;
       this.staff.salaryPerhour = value.salaryPerhour;
       this.staff.joined = new Date().toLocaleDateString();
-      this._services.saveStaff(this.staff as People).subscribe(staff=>{
-
-        this._router.navigate(['/'])
+      this._services.saveStaff(this.staff as People).subscribe(staff => {
+        this._router.navigate(['/']);
       });
+      this._services.saveStaffInfo(this.staff.id).subscribe(res =>
+        console.log(res)
+      );
     } else {
       this._flashMessagesService.show('Fill In all Fields Corectly', {
         cssClass: 'alert-danger', timeout: 4000

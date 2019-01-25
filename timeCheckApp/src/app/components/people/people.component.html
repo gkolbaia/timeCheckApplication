@@ -4,7 +4,7 @@
   <li class="card card-body mb-2" *ngFor="let person of people">
     <h3> <a routerLink="person-info/{{ person.id }}" style="color:black; text-decoration: none" > {{ person.firstName }} {{ person.lastName }} </a>
       <small>
-        <button (click)="person.showPersonParameter=!person.showPersonParameter" class="btn btn-dark btn-sm mr-2">
+        <button (click)="showPersonParametersButton(person)" class="btn btn-dark btn-sm mr-2">
           <i [ngClass]="person.showPersonParameter ? 'fa fa-minus' : 'fa fa-plus'"></i>
         </button>
       </small>

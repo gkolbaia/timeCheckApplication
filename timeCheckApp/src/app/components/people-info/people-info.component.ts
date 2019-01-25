@@ -4,6 +4,7 @@ import { FlashMessagesModule } from "angular2-flash-messages/module/module";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { StaffServicesService } from "../../service/staff-services.service";
 import { Router, ActivatedRoute } from '@angular/router';
+import { PeopleTimingInfo } from "../../models/people-timing-info-models";
 
 @Component({
   selector: 'app-people-info',
@@ -13,6 +14,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PeopleInfoComponent implements OnInit {
   id: string;
   staff: People;
+  staffTimingInfo: PeopleTimingInfo;
+
+
 
   constructor(
     private _staffServices: StaffServicesService,
@@ -29,12 +33,21 @@ export class PeopleInfoComponent implements OnInit {
       arr.forEach(element => {
         if (element.id === this.id) {
           this.staff = element;
-          console.log(this.staff)
         }
       });
-
     })
-
+    this.getTimingDetales();
+  }
+  getTimingDetales() {
+    this._staffServices.getStaffInfo().subscribe(res => {
+      let data: PeopleTimingInfo[] = res;
+      data.map(staffTiming => {
+        if (staffTiming.id === this.staff.id) {
+          this.staffTimingInfo = staffTiming;
+          console.log(this.staffTimingInfo)
+        }
+      })
+    })
   }
 
 }

@@ -1,2 +1,23 @@
-
-<div *ngIf="staff">{{staff.workingTime}} {{staff.lastName}}</div>
+<div *ngIf="staffTimingInfo">
+  <h1 class="mb-3 mt-3">{{staff.firstName}} {{staff.lastName}} </h1>
+  <a [routerLink]="['/']"><i class="fas fa-arrow-left"></i> back</a>
+  <ul class="list-unstyled">
+    <li class="card card-body mb-2" *ngFor="let timing of staffTimingInfo.timing">
+      <h3>{{timing.date}}
+        <small>
+          <small>
+            <button (click)="timing.showCurrentDayTiming = !timing.showCurrentDayTiming" class="btn btn-dark btn-sm mr-2">
+              <i [ngClass]="timing.showCurrentDayTiming ? 'fa fa-minus' : 'fa fa-plus'"></i>
+            </button>
+          </small>
+        </small>
+      </h3>
+      <div *ngIf="timing.showCurrentDayTiming">
+        <p *ngFor="let times of timing.enterAndLeaveTImes">
+          entertime: {{times.enterTime}}, <br>
+          leavetime: {{times.leaveTime}}
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>
