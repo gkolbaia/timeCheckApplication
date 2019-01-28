@@ -91,7 +91,7 @@ app.post('/putStaffTimingInfo', function (req, res) {
     for (let i = 0; i < data.length; i++) {
         if (data[i].id === req.body.id) {
             data.splice(i, 1);
-            
+
         }
     };
     data.push(req.body);
@@ -172,6 +172,7 @@ app.post('/deleteStaffTimingInfo', function (req, res) {
         res.json(req.body);
     });
 });
+
 app.listen(8000, () => {
     console.log('Server listening on port ' + 8000);
 });

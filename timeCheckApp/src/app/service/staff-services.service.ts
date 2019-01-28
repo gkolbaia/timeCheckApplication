@@ -20,6 +20,7 @@ export class StaffServicesService {
   putStaff(data) {
     return this._http.post<People>('http://localhost:8000/putStaff', data)
   }
+  
   deleteStaff(data) {
     return this._http.post<People>('http://localhost:8000/deleteStaff', data)
   }

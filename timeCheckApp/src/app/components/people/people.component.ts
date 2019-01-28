@@ -4,6 +4,7 @@ import { People } from 'src/app/models/people-model';
 import { StaffServicesService } from '../../service/staff-services.service'
 import { PeopleTimingInfo, Timing } from "../../models/people-timing-info-models";
 import { EnterAndLeaveTimes } from "../../models/people-timing-info-models";
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
@@ -14,7 +15,11 @@ export class PeopleComponent implements OnInit {
   peopleTimingInfo: PeopleTimingInfo[];
   showPeopleParameters: boolean = false;
 
-  constructor(private _services: StaffServicesService) { }
+
+  constructor(
+    private _services: StaffServicesService,
+    private _router: Router
+  ) { }
 
   ngOnInit() {
     this._services.getStaff().subscribe((res: People[]) => {
@@ -78,7 +83,6 @@ export class PeopleComponent implements OnInit {
     if (!person.working) {
       person.salaryForMonth = Math.round((person.workingTime / 60) * person.salaryPerhour);
       this._services.putStaff(person as People).subscribe();
-
     } else {
       var workingTime = person.workingTime + Math.round(((new Date().getTime()) - person.enterTime) / 1000 / 60)
       person.salaryForMonth = Math.round((workingTime / 60) * person.salaryPerhour)
@@ -105,8 +109,53 @@ export class PeopleComponent implements OnInit {
   }
   showPersonParametersButton(person: People) {
     person.showPersonParameter = !person.showPersonParameter;
-    if(person.showPersonParameter === true){
+    if (person.showPersonParameter === true) {
       person.salaryForMonth = null;
     }
   }
+  sad(callback) {
+    var array = this.people;
+    if (array.length > 0) {
+      var x = array[0];
+      array.shift();
+      this._services.putStaff(x).subscribe(res => {
+        this.sad(callback);
+      })
+    } else {
+      callback()
+    }
+  }
+  restartPeriod() {
+    if (confirm('Are You Sure No')) {
+
+      this.people.map(element => {
+        if (element.working === true) {
+          element.enterTime = new Date().getTime();
+          element.workingTime = null;
+          element.salaryForMonth = null;
+        } else {
+          element.workingTime = null;
+          element.salaryForMonth = null;
+        }
+      });
+      var self = this;
+      this.sad(function () {
+        self._services.getStaff().subscribe((res:People[]) => {
+          self.people = res;
+        })
+      });
+      console.log(this.people)
+
+
+    }
+  }
+
+  // function ....
+  // 1) array.length == 0 return
+  // 2) array ამოღება 1 ელემენტის
+  // 3) ამ ელემენტის შენახვა
+  // 4) შენახვის მეთოდი რესფონსს რომ დააბრუნებს.. იგივე მეთოდეის გამოძახება.. იგივე პარამეტრით
+
+
 }
+
