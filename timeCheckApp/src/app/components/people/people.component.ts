@@ -60,14 +60,16 @@ export class PeopleComponent implements OnInit {
             if (this.peopleTimingInfo[i].timing[j].date === new Date().toDateString()) {
               this.peopleTimingInfo[i].timing[j].enterAndLeaveTImes.push(times);
               //DGES TU AR ARIS SHEMOSULI
-            } else {
+            } else if (j === (this.peopleTimingInfo[i].timing.length - 1)) {
               let timing: Timing = {
                 date: new Date().toDateString(),
                 enterAndLeaveTImes: [times]
               }
               this.peopleTimingInfo[i].timing.push(timing)
             }
+            console.log(2)
           }
+          console.log(1);
           //TU SAERTOD PIRVELAD SHEMODIS
         } else {
           let timing: Timing = {
@@ -113,13 +115,13 @@ export class PeopleComponent implements OnInit {
       person.salaryForMonth = null;
     }
   }
-  sad(callback) {
+  loopFunction(callback) {
     var array = this.people;
     if (array.length > 0) {
       var x = array[0];
       array.shift();
       this._services.putStaff(x).subscribe(res => {
-        this.sad(callback);
+        this.loopFunction(callback);
       })
     } else {
       callback()
@@ -139,8 +141,8 @@ export class PeopleComponent implements OnInit {
         }
       });
       var self = this;
-      this.sad(function () {
-        self._services.getStaff().subscribe((res:People[]) => {
+      this.loopFunction(function () {
+        self._services.getStaff().subscribe((res: People[]) => {
           self.people = res;
         })
       });

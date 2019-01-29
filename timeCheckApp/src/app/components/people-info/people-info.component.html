@@ -1,6 +1,18 @@
-<div *ngIf="staffTimingInfo">
-  <h1 class="mb-3 mt-3">{{staff.firstName}} {{staff.lastName}} </h1>
+<div *ngIf="staffTimingInfo && staff">
+  <h1 class="mb-3 mt-3">{{staff.firstName}} {{staff.lastName}}  <small><button (click)="staff.showPersonParameter = !staff.showPersonParameter" class="btn btn-dark btn-sm" ><i [ngClass]="staff.showPersonParameter? 'fa fa-minus': 'fa fa-plus'"></i> Personal</button></small></h1>
+
+
   <a [routerLink]="['/']"><i class="fas fa-arrow-left"></i> back</a>
+  <div *ngIf="staff.showPersonParameter">
+      <ul class="list-group">
+          <li class="list-group-item">{{staff.firstName}} {{staff.lastName}}</li>
+          <li class="list-group-item">Email: {{staff.email}}</li>
+          <li class="list-group-item">Phone: {{staff.phone}}</li>
+          <li class="list-group-item">Sallary Per Hour: {{staff.salaryPerhour}}</li>
+
+        </ul>
+
+  </div>
   <ul class="list-unstyled">
     <li class="card card-body mb-2" *ngFor="let timing of staffTimingInfo.timing">
       <h3>{{timing.date}}

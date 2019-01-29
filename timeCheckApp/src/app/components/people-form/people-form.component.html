@@ -15,12 +15,17 @@
           [(ngModel)]="staff.firstName"
           required
           minlength="3"
+          appForbiddenName="giorgi"
           >
           <div [hidden]="!firstName.errors?.required" class="invalid-feedback">
             First Name required
           </div>
           <div [hidden]="!firstName.errors?.minlength" class="invalid-feedback">
               First Name Should Be at least 3 character
+            </div>
+            <!-- chemi -->
+            <div [hidden]="!firstName.errors?.appForbiddenName" class="invalid-feedback">
+              giorgi ara yle
             </div>
 
     </div>

@@ -35,8 +35,9 @@ export class PeopleInfoComponent implements OnInit {
           this.staff = element;
         }
       });
+      this.getTimingDetales();
     })
-    this.getTimingDetales();
+
   }
   getTimingDetales() {
     this._staffServices.getStaffInfo().subscribe(res => {
@@ -44,7 +45,6 @@ export class PeopleInfoComponent implements OnInit {
       data.map(staffTiming => {
         if (staffTiming.id === this.staff.id) {
           this.staffTimingInfo = staffTiming;
-          console.log(this.staffTimingInfo)
         }
       })
     })
