@@ -1,9 +1,10 @@
 <div *ngIf="staffTimingInfo && staff">
-  <h1 class="mb-3 mt-3">{{staff.firstName}} {{staff.lastName}}  <small><button (click)="staff.showPersonParameter = !staff.showPersonParameter" class="btn btn-dark btn-sm" ><i [ngClass]="staff.showPersonParameter? 'fa fa-minus': 'fa fa-plus'"></i> Personal</button></small></h1>
+  <h1 class="mb-3 mt-3">{{staff.firstName}} {{staff.lastName}}  <small><button (click)="staff.showPersonParameter = !staff.showPersonParameter" class="btn btn-info btn-sm" ><i [ngClass]="staff.showPersonParameter? 'fa fa-minus': 'fa fa-plus'"></i> Personal Information</button></small></h1>
 
 
   <a [routerLink]="['/']"><i class="fas fa-arrow-left"></i> back</a>
-  <div *ngIf="staff.showPersonParameter">
+
+  <div *ngIf="staff.showPersonParameter" class="mb-3 mt-2" >
       <ul class="list-group">
           <li class="list-group-item">{{staff.firstName}} {{staff.lastName}}</li>
           <li class="list-group-item">Email: {{staff.email}}</li>
@@ -25,10 +26,14 @@
         </small>
       </h3>
       <div *ngIf="timing.showCurrentDayTiming">
-        <p *ngFor="let times of timing.enterAndLeaveTImes">
+        <!-- <p *ngFor="let times of timing.enterAndLeaveTImes">
           entertime: {{times.enterTime}}, <br>
           leavetime: {{times.leaveTime}}
-        </p>
+        </p> -->
+        <ul *ngFor="let times of timing.enterAndLeaveTImes" class="list-unstyled mb-2">
+          <li class="list-group-item">entertime: {{times.enterTime}},</li>
+          <li class="list-group-item">entertime: {{times.leaveTime}},</li>
+        </ul>
       </div>
     </li>
   </ul>
