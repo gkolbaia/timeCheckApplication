@@ -20,7 +20,7 @@ export class StaffServicesService {
   putStaff(data) {
     return this._http.post<People>('http://localhost:8000/putStaff', data)
   }
-  
+
   deleteStaff(data) {
     return this._http.post<People>('http://localhost:8000/deleteStaff', data)
   }
@@ -34,6 +34,9 @@ export class StaffServicesService {
       joined: new Date().toDateString(),
       timing: [],
     }
+    return this._http.post<PeopleTimingInfo>('http://localhost:8000/saveStaffInfo', data);
+  }
+  editStaffInfoForDeletingOldInfo(data) {
     return this._http.post<PeopleTimingInfo>('http://localhost:8000/saveStaffInfo', data);
   }
   addStaffTiming({ id, times }: { id: string, times: EnterAndLeaveTimes }) {

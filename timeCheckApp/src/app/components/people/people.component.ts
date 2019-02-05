@@ -40,7 +40,7 @@ export class PeopleComponent implements OnInit {
       person.workingTime += Math.round((person.leaveTime.getTime() - person.enterTime) / 1000 / 60);
       let EnterAndLeaveTimes = { enterTime: this.getOnlyTimeFromNewDate(new Date(person.enterTime)), leaveTime: this.getOnlyTimeFromNewDate(person.leaveTime) }
       this.timingAdd(person, EnterAndLeaveTimes);
-      //console.log(this.peopleTimingInfo[0])
+
       for (let i = 0; i < this.peopleTimingInfo.length; i++) {
         if (person.id === this.peopleTimingInfo[i].id) {
           this._services.putStaffTImingInfo(this.peopleTimingInfo[i]).subscribe();
@@ -59,7 +59,7 @@ export class PeopleComponent implements OnInit {
             //DGES ARIS TU ARIS SHEMOSULI
             if (this.peopleTimingInfo[i].timing[j].date === new Date().toDateString()) {
               this.peopleTimingInfo[i].timing[j].enterAndLeaveTImes.push(times);
-               return;
+              return;
               //DGES TU AR ARIS SHEMOSULI
             } else if (j === (this.peopleTimingInfo[i].timing.length - 1)) {
 
@@ -67,8 +67,8 @@ export class PeopleComponent implements OnInit {
                 date: new Date().toDateString(),
                 enterAndLeaveTImes: [times]
               }
-              this.peopleTimingInfo[i].timing.push(timing1);
-               return;
+              this.peopleTimingInfo[i].timing.unshift(timing1);
+              return;
             }
           }
         } else {
@@ -76,7 +76,7 @@ export class PeopleComponent implements OnInit {
             date: new Date().toDateString(),
             enterAndLeaveTImes: [times]
           }
-          this.peopleTimingInfo[i].timing.push(timing)
+          this.peopleTimingInfo[i].timing.unshift(timing)
 
         }
       }
@@ -116,20 +116,20 @@ export class PeopleComponent implements OnInit {
       person.salaryForMonth = null;
     }
   }
-  loopFunction(callback) {
+  loopFunctionForRestartPeriod(callback) {
     var array = this.people;
     if (array.length > 0) {
       var x = array[0];
       array.shift();
       this._services.putStaff(x).subscribe(res => {
-        this.loopFunction(callback);
+        this.loopFunctionForRestartPeriod(callback);
       })
     } else {
       callback()
     }
   }
   restartPeriod() {
-    if (confirm('Are You Sure No')) {
+    if (confirm('Are You Sure, you want to restart this period?')) {
 
       this.people.map(element => {
         if (element.working === true) {
@@ -142,12 +142,27 @@ export class PeopleComponent implements OnInit {
         }
       });
       var self = this;
-      this.loopFunction(function () {
+      this.loopFunctionForRestartPeriod(function () {
         self._services.getStaff().subscribe((res: People[]) => {
           self.people = res;
         })
       })
     }
   }
+  // deleteOldInfo() {
+  //   if (confirm('The Timing Information that is older than two month, will be deleted')) {
+  //     var x = new Date().getMonth();
+  //     this._services.getStaffInfo().subscribe(res => {
+  //       res.map((personTiming, index1) => {
+  //         personTiming.timing.map((dates, index) => {
+  //           if ((new Date(dates.date).getMonth() - x > 2)) {
+  //             res[index1].timing.splice(index, res[index1].timing.length)
+
+  //           }
+  //         })
+  //       })
+  //     })
+  //   }
+  // }
 }
 

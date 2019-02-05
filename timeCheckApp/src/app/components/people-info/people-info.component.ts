@@ -35,25 +35,27 @@ export class PeopleInfoComponent implements OnInit {
           this.staff = element;
           this.staff.firstName = this.capitalizeFirstLetter(this.staff.firstName)
           this.staff.lastName = this.capitalizeFirstLetter(this.staff.lastName)
-
         }
       });
-      this.getTimingDetales();
+      this.getTimingDetails();
     })
 
   }
-  getTimingDetales() {
+  getTimingDetails () {
     this._staffServices.getStaffInfo().subscribe(res => {
       let data: PeopleTimingInfo[] = res;
+
       data.map(staffTiming => {
         if (staffTiming.id === this.staff.id) {
           this.staffTimingInfo = staffTiming;
         }
       })
+      //KAI RAGAC console.log(new Date(this.staffTimingInfo.timing[0].date).getMonth())
     })
   }
-  capitalizeFirstLetter(string){
+  capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1, (string.length));
   }
 
 }
+

@@ -1,5 +1,6 @@
 <a [routerLink]="['/adduser']" class="btn btn-success mt-4 mb-3 mr-2"><i class="fa fa-plus"></i> Add Staff</a>
-<a (click)="restartPeriod()" class="btn btn-danger mt-4 mb-3" style="color:white"><i class="fa fa-undo"></i> Restart Period</a>
+<a (click)="restartPeriod()" class="btn btn-danger mr-2 mt-4 mb-3" style="color:white"><i class="fa fa-undo"></i> Restart Period</a>
+<!-- <a (click)="deleteOldInfo()" class="btn btn-danger mt-4 mb-3" style="color:white"><i class="fa fa-trash" aria-hidden="true"></i> Delete Old Info</a> -->
 <ul class="list-unstyled">
   <li class="card card-body mb-2" *ngFor="let person of people">
     <h3> <a routerLink="person-info/{{ person.id }}"  class="link" > {{ person.firstName }} {{ person.lastName }} </a>
