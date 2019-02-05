@@ -59,24 +59,25 @@ export class PeopleComponent implements OnInit {
             //DGES ARIS TU ARIS SHEMOSULI
             if (this.peopleTimingInfo[i].timing[j].date === new Date().toDateString()) {
               this.peopleTimingInfo[i].timing[j].enterAndLeaveTImes.push(times);
+               return;
               //DGES TU AR ARIS SHEMOSULI
             } else if (j === (this.peopleTimingInfo[i].timing.length - 1)) {
-              let timing: Timing = {
+
+              let timing1: Timing = {
                 date: new Date().toDateString(),
                 enterAndLeaveTImes: [times]
               }
-              this.peopleTimingInfo[i].timing.push(timing)
+              this.peopleTimingInfo[i].timing.push(timing1);
+               return;
             }
-            console.log(2)
           }
-          console.log(1);
-          //TU SAERTOD PIRVELAD SHEMODIS
         } else {
           let timing: Timing = {
             date: new Date().toDateString(),
             enterAndLeaveTImes: [times]
           }
           this.peopleTimingInfo[i].timing.push(timing)
+
         }
       }
     }
@@ -145,19 +146,8 @@ export class PeopleComponent implements OnInit {
         self._services.getStaff().subscribe((res: People[]) => {
           self.people = res;
         })
-      });
-      console.log(this.people)
-
-
+      })
     }
   }
-
-  // function ....
-  // 1) array.length == 0 return
-  // 2) array ამოღება 1 ელემენტის
-  // 3) ამ ელემენტის შენახვა
-  // 4) შენახვის მეთოდი რესფონსს რომ დააბრუნებს.. იგივე მეთოდეის გამოძახება.. იგივე პარამეტრით
-
-
 }
 

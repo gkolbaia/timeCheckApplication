@@ -172,7 +172,6 @@ app.post('/deleteStaffTimingInfo', function (req, res) {
         res.json(req.body);
     });
 });
-
 app.listen(8000, () => {
     console.log('Server listening on port ' + 8000);
 });

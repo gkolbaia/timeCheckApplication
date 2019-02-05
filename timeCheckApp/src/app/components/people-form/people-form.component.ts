@@ -39,13 +39,13 @@ export class PeopleFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.capitalizeFirtsLetter('giorgi');
   }
   onSubmit({ value, valid }: { value: People, valid: boolean }) {
     if (valid) {
       this.staff.id = this.generateId();
-      this.staff.firstName = value.firstName;
-      this.staff.lastName = value.lastName;
+      this.staff.firstName = this.capitalizeFirtsLetter(value.firstName);
+      this.staff.lastName = this.capitalizeFirtsLetter(value.lastName);
       this.staff.email = value.email;
       this.staff.phone = value.phone;
       this.staff.salaryPerhour = value.salaryPerhour;
@@ -61,12 +61,7 @@ export class PeopleFormComponent implements OnInit {
         cssClass: 'alert-danger', timeout: 4000
       })
     }
-
   }
-
-
-
-
 
   generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -78,6 +73,10 @@ export class PeopleFormComponent implements OnInit {
     this.staff.firstName = '',
       this.staff.lastName = '',
       this.staff.salaryPerhour = null;
+  }
+  capitalizeFirtsLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1, (string.length));
+
   }
 }
 

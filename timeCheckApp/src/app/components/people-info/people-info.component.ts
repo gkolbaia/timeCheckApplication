@@ -33,6 +33,9 @@ export class PeopleInfoComponent implements OnInit {
       arr.forEach(element => {
         if (element.id === this.id) {
           this.staff = element;
+          this.staff.firstName = this.capitalizeFirstLetter(this.staff.firstName)
+          this.staff.lastName = this.capitalizeFirstLetter(this.staff.lastName)
+
         }
       });
       this.getTimingDetales();
@@ -48,6 +51,9 @@ export class PeopleInfoComponent implements OnInit {
         }
       })
     })
+  }
+  capitalizeFirstLetter(string){
+    return string.charAt(0).toUpperCase() + string.slice(1, (string.length));
   }
 
 }

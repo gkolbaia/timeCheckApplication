@@ -1,11 +1,11 @@
-
 <a [routerLink]="['/adduser']" class="btn btn-success mt-4 mb-3 mr-2"><i class="fa fa-plus"></i> Add Staff</a>
 <a (click)="restartPeriod()" class="btn btn-danger mt-4 mb-3" style="color:white"><i class="fa fa-undo"></i> Restart Period</a>
 <ul class="list-unstyled">
   <li class="card card-body mb-2" *ngFor="let person of people">
-    <h3> <a routerLink="person-info/{{ person.id }}" style="color:black; text-decoration: none" > {{ person.firstName }} {{ person.lastName }} </a>
+    <h3> <a routerLink="person-info/{{ person.id }}"  class="link" > {{ person.firstName }} {{ person.lastName }} </a>
+
       <small>
-        <button (click)="showPersonParametersButton(person)" class="btn btn-dark btn-sm mr-2">
+        <button (click)="showPersonParametersButton(person)" class="btn btn-dark btn-sm ml-1 mr-2">
           <i [ngClass]="person.showPersonParameter ? 'fa fa-minus' : 'fa fa-plus'"></i>
         </button>
       </small>
@@ -40,7 +40,7 @@
       <li class="list-group-item">Joined: {{person.joined }}</li>
       <li class="list-group-item">Time: hour {{(person.workingTime - (person.workingTime%60))/60}} mins:
         {{person.workingTime%60}}</li>
-      <li class="list-group-item">Salary: <input type="text" [(ngModel)]="person.salaryForMonth" disabled = "true"></li>
+      <li class="list-group-item">Salary: <input type="text" [(ngModel)]="person.salaryForMonth" disabled = "true"> <div *ngIf="person.working" style="color:red" >The worked Time is not correct while working, but sallary will be calculated correctly</div></li>
 
     </ul>
   </li>

@@ -33,8 +33,8 @@ export class EditComponentComponent implements OnInit {
   }
   onSubmit({ value, valid }: { value: People, valid: boolean }) {
     if (valid) {
-      this.staff.firstName = value.firstName;
-      this.staff.lastName = value.lastName;
+      this.staff.firstName = this.capitalizeFirtsLetter(value.firstName);
+      this.staff.lastName = this.capitalizeFirtsLetter(value.lastName);
       this.staff.email = value.email;
       this.staff.phone = value.phone;
       this.staff.salaryPerhour = value.salaryPerhour;
@@ -46,5 +46,8 @@ export class EditComponentComponent implements OnInit {
         cssClass: 'alert-danger', timeout: 4000
       })
     }
+  }
+  capitalizeFirtsLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1, (string.length));
   }
 }
