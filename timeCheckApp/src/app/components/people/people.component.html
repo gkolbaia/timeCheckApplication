@@ -1,3 +1,4 @@
+
 <a [routerLink]="['/adduser']" class="btn btn-success mt-4 mb-3 mr-2"><i class="fa fa-plus"></i> Add Staff</a>
 <a (click)="restartPeriod()" class="btn btn-danger mr-2 mt-4 mb-3" style="color:white"><i class="fa fa-undo"></i> Restart Period</a>
 <!-- <a (click)="deleteOldInfo()" class="btn btn-danger mt-4 mb-3" style="color:white"><i class="fa fa-trash" aria-hidden="true"></i> Delete Old Info</a> -->
@@ -38,11 +39,10 @@
 
     </h3>
     <ul class="list-group" *ngIf="person.showPersonParameter">
-      <li class="list-group-item">Joined: {{person.joined }}</li>
+      <!-- <li class="list-group-item">Joined: {{person.joined }}</li> -->
       <li class="list-group-item">Time: hour {{(person.workingTime - (person.workingTime%60))/60}} mins:
         {{person.workingTime%60}}</li>
-      <li class="list-group-item">Salary: <input type="text" [(ngModel)]="person.salaryForMonth" disabled = "true"> <div *ngIf="person.working" style="color:red" >The worked Time is not correct while working, but sallary will be calculated correctly</div></li>
-
+      <li class="list-group-item">Salary: <input type="text" [(ngModel)]="person.salaryForMonth" disabled = "true"> <div *ngIf="person.working" style="color:red; font-size: 14px;" >The worked Time is not correct while working, but sallary will be calculated correctly</div></li>
     </ul>
   </li>
 </ul>

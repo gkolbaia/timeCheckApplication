@@ -4,7 +4,9 @@ import { People } from 'src/app/models/people-model';
 import { StaffServicesService } from '../../service/staff-services.service'
 import { PeopleTimingInfo, Timing } from "../../models/people-timing-info-models";
 import { EnterAndLeaveTimes } from "../../models/people-timing-info-models";
+import { EmitService } from "../../service/emit-service.service";
 import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
@@ -18,12 +20,16 @@ export class PeopleComponent implements OnInit {
 
   constructor(
     private _services: StaffServicesService,
-    private _router: Router
+    private _router: Router,
+    private EmitService: EmitService
   ) { }
 
   ngOnInit() {
+
     this._services.getStaff().subscribe((res: People[]) => {
       this.people = res;
+      //EMMIT
+      // this.EmitService.setPeople(res)
     })
     this._services.getStaffInfo().subscribe(res => {
       this.peopleTimingInfo = res;
@@ -115,6 +121,7 @@ export class PeopleComponent implements OnInit {
     if (person.showPersonParameter === true) {
       person.salaryForMonth = null;
     }
+
   }
   loopFunctionForRestartPeriod(callback) {
     var array = this.people;

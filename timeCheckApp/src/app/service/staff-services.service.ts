@@ -3,7 +3,7 @@ import { People } from '../models/people-model';
 import { HttpClient } from '@angular/common/http';
 import { PeopleTimingInfo } from "../models/people-timing-info-models";
 import { EnterAndLeaveTimes } from "../models/people-timing-info-models";
-
+import { Timing } from "../models/people-timing-info-models";
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +13,12 @@ export class StaffServicesService {
   getStaff() {
     return this._http.post('http://localhost:8000/getStaff', {});
   }
-
   saveStaff(data) {
     return this._http.post<People>('http://localhost:8000/saveStaff', data);
   }
   putStaff(data) {
     return this._http.post<People>('http://localhost:8000/putStaff', data)
   }
-
   deleteStaff(data) {
     return this._http.post<People>('http://localhost:8000/deleteStaff', data)
   }
@@ -54,6 +52,5 @@ export class StaffServicesService {
   putStaffTImingInfo(data) {
     return this._http.post<PeopleTimingInfo>('http://localhost:8000/putStaffTimingInfo', data);
   }
-
 
 }

@@ -13,3 +13,8 @@ export interface PeopleTimingInfo {
   joined: string;
   timing: Timing[]
 }
+export interface Months {
+  showParameter: boolean;
+  month: string;
+  dates: Timing[];
+}
